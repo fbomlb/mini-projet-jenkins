@@ -5,7 +5,7 @@ pipeline {
         IMAGE_NAME = 'webapp'
         IMAGE_TAG = 'v1'
         DOCKER_PASSWORD = credentials('docker-password')
-        DOCKER_USERNAME = 'fbomlb'
+        DOCKER_USERNAME = 'fbomlbtraining'
         HOST_PORT = 80
         CONTAINER_PORT = 80
         IP_DOCKER = '172.17.0.1'
