@@ -1,11 +1,11 @@
-@Library('ulrich-shared-library')_
+@Library('fbomlb-shared-library')_
 
 pipeline {
     environment {
         IMAGE_NAME = 'webapp'
         IMAGE_TAG = 'v1'
         DOCKER_PASSWORD = credentials('docker-password')
-        DOCKER_USERNAME = 'ulrichsteve'
+        DOCKER_USERNAME = 'fbomlb'
         HOST_PORT = 80
         CONTAINER_PORT = 80
         IP_DOCKER = '172.17.0.1'
