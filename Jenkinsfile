@@ -50,9 +50,9 @@ pipeline {
             }
         }
 
-        stage('Deploy Review') {
+        stage('Deploy Dev') {
             environment {
-                SERVER_IP = '3.91.149.242'
+                SERVER_IP = '35.180.86.93'
                 SERVER_USERNAME = 'ubuntu'
             }
             steps {
@@ -74,36 +74,11 @@ pipeline {
                 }
             }
         }
-
-        stage('Deploy Staging') {
-            environment {
-                SERVER_IP = '54.165.234.130'
-                SERVER_USERNAME = 'ubuntu'
-            }
-            steps {
-                script {
-                    timeout(time: 30, unit: "MINUTES") {
-                        input message: "Voulez-vous réaliser un déploiement sur l'environnement de staging ?", ok: 'Yes'
-                    }
-                    sshagent(['key-pair']) {
-                        sh '''
-                            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                            ssh -o StrictHostKeyChecking=no -l $SERVER_USERNAME $SERVER_IP "docker rm -f $IMAGE_NAME || echo 'All deleted'"
-                            ssh -o StrictHostKeyChecking=no -l $SERVER_USERNAME $SERVER_IP "docker pull $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG || echo 'Image Download successfully'"
-                            sleep 30
-                            ssh -o StrictHostKeyChecking=no -l $SERVER_USERNAME $SERVER_IP "docker run --rm -dp $HOST_PORT:$CONTAINER_PORT --name $IMAGE_NAME $DOCKER_USERNAME/$IMAGE_NAME:$IMAGE_TAG"
-                            sleep 5
-                            curl -I http://$SERVER_IP:$HOST_PORT
-                        '''
-                    }
-                }
-            }
-        }
-
+        
         stage('Deploy Prod') {
             // when {expression {GIT_BRANCH == 'origin/prod'}}
             environment {
-                SERVER_IP = '3.93.76.111'
+                SERVER_IP = '13.38.227.180'
                 SERVER_USERNAME = 'ubuntu'
             }
             steps {
