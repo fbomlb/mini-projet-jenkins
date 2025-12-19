@@ -18,7 +18,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        //docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
                         docker buildx build --platform linux/amd64,linux/arm64 --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
                     '''
                 }
