@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker  build --platform linux/amd64 --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
+                        docker build --platform linux/amr64 --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
                     '''
                 }
             }
@@ -52,7 +52,7 @@ pipeline {
 
         stage('Deploy Dev') {
             environment {
-                SERVER_IP = '35.180.189.157'
+                SERVER_IP = '13.38.65.150'
                 SERVER_USERNAME = 'ubuntu'
             }
             steps {
@@ -78,7 +78,7 @@ pipeline {
         stage('Deploy Prod') {
             // when {expression {GIT_BRANCH == 'origin/prod'}}
             environment {
-                SERVER_IP = '13.36.36.28'
+                SERVER_IP = '15.237.106.153'
                 SERVER_USERNAME = 'ubuntu'
             }
             steps {
